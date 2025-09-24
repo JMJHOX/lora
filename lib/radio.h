@@ -13,5 +13,6 @@ private:
     SX1278 radio;                   // Objeto radio de RadioLib
 };
 
+
 #endif
 
