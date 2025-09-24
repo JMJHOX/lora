@@ -1,19 +1,24 @@
 #include "Radio.h"
+#include <iostream>
 
-Radio::Radio() : radio(10, 2, 0, 0) {} // SPI pins: NSS=10, DIO0=2, RESET=0, BUSY=0
+Radio::Radio() : radio() {}  // Constructor vacío, pins se configuran en begin()
 
-bool Radio::begin() {
-    int state = radio.begin(433.0, 125.0, 7, 1, 8, 0, true); // freq=433MHz, BW=125kHz, CR=4/7
-    return (state == RADIOLIB_ERR_NONE);
+bool Radio::begin(double freq) {
+    int state = radio.begin(freq, 125.0, 5, 7, 0x12, 17, true);
+    if(state != RADIOLIB_ERR_NONE) {
+        std::cerr << "Error iniciando radio: " << state << std::endl;
+        return false;
+    }
+    return true;
 }
 
 bool Radio::receive() {
-    int state = radio.receive();
-    return (state == RADIOLIB_ERR_NONE);
-}
-
-
-int16_t Radio::getRSSI() {
-    return radio.getRSSI();
+    uint8_t buffer[256];
+    int16_t state = radio.receive(buffer, sizeof(buffer));
+    if(state == RADIOLIB_ERR_NONE) {
+        std::cout << "Paquete recibido! RSSI: " << radio.getRSSI() << " dBm" << std::endl;
+        return true;
+    }
+    return false;
 }
 

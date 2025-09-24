@@ -1,18 +1,18 @@
 #ifndef RADIO_H
 #define RADIO_H
 
-#include <RadioLib.h>
+#include "../../RadioLib/src/RadioLib.h"  // ruta a RadioLib.h
+#include "../../RadioLib/src/modules/SX127x/SX1278.h"
 
 class Radio {
 public:
-    Radio();                       // Constructor
-    bool begin();                   // Inicializa el radio
-    int16_t getRSSI();              // Lee RSSI actual
-    bool receive();                 // Espera a recibir un paquete
-private:
-    SX1278 radio;                   // Objeto radio de RadioLib
-};
+    Radio();
+    bool begin(double freq = 915.0);  // MHz
+    bool receive();
 
+private:
+    SX1278 radio;
+};
 
 #endif
 
