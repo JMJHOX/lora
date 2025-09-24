@@ -1,11 +1,10 @@
 #include "MyRadio.h"
 #include <iostream>
 
-MyRadio::MyRadio() : radio(nullptr) {} // Constructor vacío
+
 
 bool MyRadio::begin() {
-    // Configurar pines explícitamente
-    radio.setPins(NSS, DIO0, RESET, BUSY);
+
 
     // Inicialización segura: 433 MHz, SF7, BW 125 kHz
     int state = radio.begin(433.0, 125.0, 5, 7, 0x12, 17, true);

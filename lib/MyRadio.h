@@ -11,12 +11,13 @@ public:
     bool receive();    // Intenta recibir un paquete y muestra RSSI
 
 private:
+    
+    // Pines SPI0 y conexiones del SX1278
+    static const int NSS = 8;    // CE0
+    static const int DIO0 = 25;
+    static const int RESET = 17;
+    static const int BUSY = 24;  // si tu mÃ³dulo no tiene BUSY, poner 0
     SX1278 radio;
-    static const int NSS = 10;    // Pines SPI de la Pi, ajústalos según tu conexión
-    static const int DIO0 = 2;
-    static const int RESET = 0;
-    static const int BUSY = 0;
 };
 
 #endif
-
