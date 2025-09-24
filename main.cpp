@@ -1,18 +1,19 @@
-#include "lib/Radio.h"
+#include "Radio.h"
 #include <iostream>
 #include <unistd.h>
 
 int main() {
     Radio myRadio;
-    if(!myRadio.begin(915.0)) {
-        return 1;
+
+    if(!myRadio.begin()){
+        return 1; // error inicializando
     }
 
-    std::cout << "Esperando paquetes..." << std::endl;
+    std::cout << "Esperando paquetes en 433 MHz..." << std::endl;
 
-    while(true) {
+    while(true){
         myRadio.receive();
-        sleep(1);  // espera 1 segundo entre intentos
+        sleep(1); // espera 1 segundo entre intentos
     }
 
     return 0;
