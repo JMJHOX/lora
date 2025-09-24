@@ -2,6 +2,8 @@
 #include <iostream>
 #include <unistd.h>
 
+MyRadio::MyRadio() : radio(nullptr) {}
+
 int main() {
     MyRadio myRadio;
 
